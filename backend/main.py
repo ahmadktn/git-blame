@@ -23,5 +23,5 @@ def health():
 
 # Routers registered here as services are built
 # from routers import analyze, results
-# app.include_router(analyze.router, prefix="/analyze", tags=["analyze"])
+app.include_router(analyze.router, prefix="/analyze", tags=["analyze"])
 # app.include_router(results.router, prefix="/results", tags=["results"])
