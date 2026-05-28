@@ -4,8 +4,9 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from fastapi.responses import FileResponse
 
-from models import AnalysisJob, AnalysisRequest, AnalysisStatus, RawCommit
+from models import AnalysisJob, AnalysisRequest, AnalysisStatus, RawCommit, CommitAnalysis
 from services.github import fetch_commits
+from services.analyzer import analyze_commit
 from store import store
 
 router = APIRouter()
@@ -18,8 +19,17 @@ router = APIRouter()
 async def _run_fetch(job_id: str, repo_url: str, max_commits: int):
     store.update_job(job_id, status=AnalysisStatus.RUNNING)
     try:
-        owner, repo_name, commits = await fetch_commits(repo_url, max_commits)
-        store.save_commits(job_id, commits)
+        owner, repo_name, raw_commits = await fetch_commits(repo_url, max_commits)
+        
+        analyzed_commits = []
+        for i, commit in enumerate(raw_commits):
+            # Offload CPU-heavy NLP to a thread so it doesn't freeze the API!
+            analyzed = await asyncio.to_thread(analyze_commit, commit)
+            analyzed_commits.append(analyzed)
+            if i % 10 == 0:
+                store.update_job(job_id, progress=int((i / len(raw_commits)) * 100))
+                
+        store.save_commits(job_id, analyzed_commits)
         store.update_job(
             job_id,
             status=AnalysisStatus.COMPLETE,
@@ -42,6 +52,11 @@ async def start_analysis(request: AnalysisRequest, background_tasks: BackgroundT
     Accepts a public repo URL and kicks off an async commit fetch.
     Returns a job object immediately; poll GET /analyze/{job_id} for status.
     """
+    # Check for cached results
+    cached_job = store.get_job_by_repo(str(request.repo_url))
+    if cached_job:
+        return cached_job
+        
     job = store.create_job(str(request.repo_url))
     background_tasks.add_task(_run_fetch, job.job_id, str(request.repo_url), request.max_commits)
     return job
@@ -63,7 +78,7 @@ def get_job_status(job_id: str):
 # GET /analyze/{job_id}/commits — list fetched commits
 # ---------------------------------------------------------------------------
 
-@router.get("/{job_id}/commits", response_model=list[RawCommit])
+@router.get("/{job_id}/commits", response_model=list[CommitAnalysis])
 def get_commits(job_id: str, skip: int = 0, limit: int = 50):
     job = store.get_job(job_id)
     if not job:

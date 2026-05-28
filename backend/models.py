@@ -101,13 +101,25 @@ class RuleScore(BaseModel):
 # ---------------------------------------------------------------------------
 
 class NLPFeatures(BaseModel):
+    # Verb analysis
     has_imperative_verb: bool = False
     detected_verb: Optional[str] = None          # e.g. "Add", "Fix", "Remove"
+    verb_is_past_tense: bool = False             # "Added", "Fixed" -- negative signal
+
+    # Specificity
     has_code_artifact: bool = False               # file/function/module name found
-    entities: list[str] = []                      # NER-detected entities
-    similarity_score: float = 0.0                 # 0-1 similarity to good-commit corpus
+    entities: list[str] = []                      # NER + regex detected entities
+
+    # Similarity
+    similarity_score: float = 0.0                 # 0-1 cosine sim to good-commit corpus
+
+    # Language
     language: Optional[str] = None                # ISO 639-1 code, e.g. "en"
     is_non_english: bool = False
+
+    # Classifier / NLTK output
+    subject_line: str = ""                        # first line of message
+    content_tokens: list[str] = []               # NLTK tokens after stopword filter
 
 
 # ---------------------------------------------------------------------------
