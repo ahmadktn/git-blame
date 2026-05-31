@@ -6,9 +6,6 @@ import urllib.request
 
 
 def calculate_nlp_pipeline_score(message):
-    """
-    YOUR EXACT SECTION 5.4 LOCAL NLP PIPELINE
-    """
     lines = message.strip().split("\n")
     subject = lines[0].strip() if lines else ""
     body = "\n".join(lines[1:]).strip() if len(lines) > 1 else ""
@@ -63,13 +60,7 @@ def calculate_nlp_pipeline_score(message):
     return total_pipeline_score, rationale_log
 
 
-# =============================================================================
-# MONDAY'S GITHUB CORE: EXTREMELY DYNAMIC FETCH ENGINE
-# =============================================================================
 def fetch_github_commits_to_csv(repo_url, count, output_csv="commits.csv"):
-    """
-    Scans the repository. Extracts authors dynamically from online data or logs.
-    """
     print(f"📡 Downloading the latest {count} commits from GitHub profile...")
     clean_url = repo_url.replace("https://github.com", "").replace(".git", "").strip("/")
     api_url = f"https://github.com{clean_url}/commits?per_page={count}"
@@ -85,7 +76,6 @@ def fetch_github_commits_to_csv(repo_url, count, output_csv="commits.csv"):
             writer.writerow(['author', 'message'])
             
             for item in data:
-                # DYNAMIC NAME SCANNER: Grabs whatever username is active on the account
                 author_name = "UnknownContributor"
                 if item.get('author') and item['author'].get('login'):
                     author_name = item['author']['login']
@@ -100,7 +90,6 @@ def fetch_github_commits_to_csv(repo_url, count, output_csv="commits.csv"):
     except Exception:
         print("⚠️ Network offline! Using dynamic placeholder dataset profiles...\n")
         
-        # Generic placeholders that hide actual team names completely
         offline_anonymous_data = [
             ["Committer_Alpha", "refactor: optimize database structure in model.py to stop lag"],
             ["Committer_Beta", "fix: change security validation schemas for api router setup"],
@@ -151,7 +140,7 @@ if __name__ == "__main__":
         print("🏆 LEADERBOARD DASHBOARD: HALL OF FAME")
         print("=" * 60)
         for i, card in enumerate(fame, 1):
-            msg_preview = card['message'].strip().split('\n')[0]
+            msg_preview = card['message'].strip().split('\n')
             print(f"[{i}] SCORE: {card['score']}/100 | Dev: @{card['author']}")
             print(f"    Message: \"{msg_preview}\"")
             print("-" * 60)
