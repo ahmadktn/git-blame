@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8000'
+const API_BASE = 'http://gitblame-backend-iux5wn-71886c-161-97-84-20.sslip.io'
 
 export function useApi() {
   async function startAnalysis(repoUrl: string, maxCommits = 100) {
