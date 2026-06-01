@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@theme {
+  --color-brand-green: #4ade80;
+  --color-brand-green-dim: #22c55e;
+  --color-brand-red: #ef4444;
+  --color-brand-yellow: #eab308;
+  --color-surface-0: #0a0f0a;
+  --color-surface-1: #111711;
+  --color-surface-2: #161e16;
+  --color-surface-3: #1e2b1e;
+  --color-surface-4: #243024;
+  --color-border: #2a3a2a;
+  --color-text-primary: #e8f5e8;
+  --color-text-muted: #6b8f6b;
+  --color-text-dim: #4a664a;
+  --font-mono: 'Space Mono', monospace;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-surface-0);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Grade colors */
+.grade-a { color: var(--color-brand-green); }
+.grade-b { color: #86efac; }
+.grade-c { color: var(--color-brand-yellow); }
+.grade-d { color: #f97316; }
+.grade-f { color: var(--color-brand-red); }
+
+.grade-bg-a { background-color: rgba(74, 222, 128, 0.15); border-color: rgba(74, 222, 128, 0.4); }
+.grade-bg-b { background-color: rgba(134, 239, 172, 0.12); border-color: rgba(134, 239, 172, 0.3); }
+.grade-bg-c { background-color: rgba(234, 179, 8, 0.12); border-color: rgba(234, 179, 8, 0.3); }
+.grade-bg-d { background-color: rgba(249, 115, 22, 0.12); border-color: rgba(249, 115, 22, 0.3); }
+.grade-bg-f { background-color: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.3); }
+
+/* Status badge */
+.status-passed { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.35); }
+.status-warn { background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.35); }
+.status-failed { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.35); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--color-surface-1); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
+
+/* Scan line effect */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  pointer-events: none;
+}
+
+/* Progress bar animation */
+@keyframes progress-fill {
+  from { width: 0%; }
+  to { width: var(--progress-target); }
+}
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-up { animation: slide-up 0.4s ease forwards; }
+.animate-fade-in { animation: fade-in 0.3s ease forwards; }
+
+/* Rotating scan */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 3s linear infinite; }
