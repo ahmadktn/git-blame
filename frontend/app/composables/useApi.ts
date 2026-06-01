@@ -1,4 +1,4 @@
-const API_BASE = 'http://gitblame-backend-iux5wn-71886c-161-97-84-20.sslip.io'
+const API_BASE = 'https://gitblame-backend.cosmologictech.com.ng'
 
 export function useApi() {
   async function startAnalysis(repoUrl: string, maxCommits = 100) {
