@@ -67,8 +67,10 @@ class NLPEngine:
             try:
                 self._spacy = spacy.load("en_core_web_sm")
             except OSError:
-                logger.warning("spaCy model 'en_core_web_sm' not found. Run: python -m spacy download en_core_web_sm")
-                raise
+                logger.warning("spaCy model 'en_core_web_sm' not found. Downloading...")
+                from spacy.cli import download  # noqa: PLC0415
+                download("en_core_web_sm")
+                self._spacy = spacy.load("en_core_web_sm")
         return self._spacy
 
     @property

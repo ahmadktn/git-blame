@@ -13,5 +13,6 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "sentence-transformers>=3.0.0",
     "spacy>=3.7.0",
+    "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl",
     "uvicorn[standard]>=0.29.0",
 ]
