@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { User, BarChart2 } from 'lucide-vue-next'
+import { User, BarChart2 } from '@lucide/vue'
 defineEmits(['detail'])
 const props = defineProps({ commit: Object })
 

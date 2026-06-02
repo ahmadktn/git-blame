@@ -53,6 +53,6 @@
 </template>
 
 <script setup>
-import { User, Bot, AlertTriangle, Share2, Trash2, Download } from 'lucide-vue-next'
+import { User, Bot, AlertTriangle, Share2, Trash2, Download } from '@lucide/vue'
 defineProps({ commit: Object, variant: { type: String, default: 'elite' } })
 </script>

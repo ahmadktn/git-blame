@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { Trophy, AlertOctagon, Share2, MessageSquare } from 'lucide-vue-next'
+import { Trophy, AlertOctagon, Share2, MessageSquare } from '@lucide/vue'
 
 const eliteCommits = [
   {

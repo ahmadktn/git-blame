@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import { X, Bot } from 'lucide-vue-next'
+import { X, Bot } from '@lucide/vue'
 defineEmits(['close'])
 defineProps({ commit: Object })
 

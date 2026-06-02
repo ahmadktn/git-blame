@@ -189,7 +189,7 @@
 </template>
 
 <script setup>
-import { LayoutDashboard, Trophy, Star, Settings, Plus, GitCommit, AlertTriangle, Download, RefreshCw, CheckCircle, XCircle, AlertCircle, Filter, SlidersHorizontal } from 'lucide-vue-next'
+import { LayoutDashboard, Trophy, Star, Settings, Plus, GitCommit, AlertTriangle, Download, RefreshCw, CheckCircle, XCircle, AlertCircle, Filter, SlidersHorizontal } from '@lucide/vue'
 
 const route = useRoute()
 const { getCommits, pollUntilComplete, startAnalysis } = useApi()

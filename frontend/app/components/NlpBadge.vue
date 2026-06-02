@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { CheckCircle, XCircle, AlertCircle } from 'lucide-vue-next'
+import { CheckCircle, XCircle, AlertCircle } from '@lucide/vue'
 const props = defineProps({ label: String, active: Boolean, warn: Boolean, detail: String })
 const icon = computed(() => {
   if (props.active && props.warn) return AlertCircle

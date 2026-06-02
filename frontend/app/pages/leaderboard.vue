@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { User, TrendingUp, TrendingDown, Minus } from 'lucide-vue-next'
+import { User, TrendingUp, TrendingDown, Minus } from '@lucide/vue'
 
 const timeFilter = ref('All Time')
 const timeFilters = ['All Time', 'Recent Crunch']

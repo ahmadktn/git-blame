@@ -31,6 +31,6 @@
 </template>
 
 <script setup>
-import { User, Medal, Star } from 'lucide-vue-next'
+import { User, Medal, Star } from '@lucide/vue'
 defineProps({ contributor: Object, rank: [String, Number], gold: Boolean })
 </script>

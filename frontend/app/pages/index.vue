@@ -126,7 +126,7 @@
 </template>
 
 <script setup>
-import { Link2, Zap, ShieldOff, Globe, Loader2, Download, Shuffle, Settings, ArrowRight } from 'lucide-vue-next'
+import { Link2, Zap, ShieldOff, Globe, Loader2, Download, Shuffle, Settings, ArrowRight } from '@lucide/vue'
 
 const router = useRouter()
 const { startAnalysis } = useApi()
