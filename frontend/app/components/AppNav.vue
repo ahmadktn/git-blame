@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { GitCommit, Search, Github } from '@lucide/vue'
+import { GitCommit, Search, GitBranch } from '@lucide/vue'
 const route = useRoute()
 const router = useRouter()
 
