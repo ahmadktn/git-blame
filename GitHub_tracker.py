@@ -160,3 +160,4 @@ if __name__ == "__main__":
             print(f"    Message: \"{msg_preview}\"")
             print(f"    Summary: {card['notes']}")
             print("-" * 60)
+
